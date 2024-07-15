@@ -2,7 +2,7 @@
 ================
 
 ## Live Demo
-Play the game live at [https://snake-game28.netlify.app/](https://snake-game28.netlify.app/)
+Play the game live at [Link](https://snake-game28.netlify.app/)
 
 ## Game Overview
 ----------------
