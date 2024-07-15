@@ -1,17 +1,20 @@
 # snake-game 
 
-## Game description
+## Live Link
+Play the [Game](https://snake-game28.netlify.app/)
 
--- This snake game is built on HTML, CSS and Javascript.
+### Game description
 
--- It uses the concepts of Canvas, Arrays, Objects and Functions.
+--This snake game is built on HTML, CSS and Javascript.
 
--- This is a basic snake game in which the snake moves automatically and the user can use the arrow keys to change its direction.
+--It uses the concepts of Canvas, Arrays, Objects and Functions.
 
--- While the game runs, food spawns at random locations. The snake can eat that food to grow. 
+--This is a basic snake game in which the snake moves automatically and the user can use the arrow keys to change its direction.
 
--- Remember the game ends when the snake head hits the wall or the snake head hits its body.
+--While the game runs, food spawns at random locations. The snake can eat that food to grow. 
 
--- The score is displayed above the gaming area.
+--Remember the game ends when the snake head hits the wall or the snake head hits its body.
 
--- Once the game is over the score is displayed to the user with the cause of game termination.
+--The score is displayed above the gaming area.
+
+--Once the game is over the score is displayed to the user with the cause of game termination.
