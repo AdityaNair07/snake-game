@@ -2,14 +2,6 @@ const canvas = document.getElementById("gameArea");
 
 const ctx = canvas.getContext("2d");
 
-let scoreVar = 0;
-
-function setScore() {
-  let score = document.getElementById("score");
-  let scoreText = document.createTextNode(scoreVar);
-  score.appendChild(scoreText);
-}
-
 function clearCanvas() {
   ctx.fillStyle = "white";
   ctx.strokeStyle = "black";
@@ -47,6 +39,8 @@ function drawSnake() {
   snake.forEach((part) => drawSnakePart(part));
 }
 
+let scoreVar = 0;
+let score = 0;
 function advanceSnake() {
   let head = { x: snake[0].x + dx, y: snake[0].y + dy };
   const eatenFood = foodX === snake[0].x && foodY === snake[0].y;
@@ -54,7 +48,8 @@ function advanceSnake() {
   if (eatenFood) {
     createFood();
     scoreVar += 10;
-    setScore();
+    score = document.getElementById("score");
+    score.innerHTML = scoreVar;
   } else {
     snake.pop();
   }
@@ -104,8 +99,6 @@ function createFood() {
   });
 }
 
-console.log(foodX, foodY);
-
 function drawFood() {
   ctx.fillStyle = "red";
   ctx.strokeStyle = "black";
@@ -113,13 +106,53 @@ function drawFood() {
   ctx.strokeRect(foodX, foodY, 10, 10);
 }
 
+let collided = "";
+
+function didGameEnd() {
+  for (let i = 4; i < snake.length; i++) {
+    const hasCollided = snake[0].x == snake[i].x && snake[0].y == snake[i].y;
+    if (hasCollided) {
+      collided = "Snake collided with itself!";
+      return true;
+    }
+  }
+  const hitLeftWall = snake[0].x < 0;
+  const hitRightWall = snake[0].x > canvas.width - 10;
+  const hitTopWall = snake[0].y < 0;
+  const hitBottomWall = snake[0].y > canvas.height - 10;
+
+  if (hitLeftWall || hitRightWall || hitTopWall || hitBottomWall)
+    collided = "Snake hit the wall!";
+
+  return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
+}
+
+let gameOver = false;
+
+function resetGame() {
+  gameOver = false;
+  scoreVar = 0;
+  snake = [...defaultPosition];
+  dx = 10;
+  dy = 0;
+  createFood();
+  score.innerHTML = scoreVar;
+}
+
 function main() {
   createFood();
   setInterval(() => {
+    if (gameOver) return;
     clearCanvas();
     drawFood();
     advanceSnake();
     drawSnake();
+    if (didGameEnd()) {
+      gameOver = true;
+      alert("Game over! Your score is: " + scoreVar + "... " + collided);
+      clearInterval();
+      resetGame();
+    }
   }, 100);
 }
 
